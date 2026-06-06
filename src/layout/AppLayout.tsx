@@ -8,7 +8,7 @@ import { useNavigate, Outlet } from "react-router-dom";
 import { useSidebar } from "@/ui/ui.hooks";
 import { useEffect, useState } from "react";
 import { P } from "@/router/path";
-
+import { authStorage } from "@/auth/storage";
 
 const { Header, Sider, Content } = Layout;
 
@@ -102,7 +102,15 @@ export default function AppLayout() {
 
       <Layout>
         <Header className="bg-white px-4">
-          Task Management System | <button>logout</button>
+          Task Management System |{" "}
+          <button
+            onClick={() => {
+              authStorage.clear();
+              navigate("/login");
+            }}
+          >
+            logout
+          </button>
         </Header>
 
         <Content className="rounded-sm sm:p-4  p-2 bg-white sm:m-4 m-2">

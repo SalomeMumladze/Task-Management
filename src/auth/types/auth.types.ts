@@ -23,3 +23,14 @@ export interface User {
   role: "owner" | "admin" | "member" | "viewer";
   createdAt: string;
 }
+
+export interface LoginRequest {
+  email: string;
+  password: string;
+}
+
+export interface AuthState {
+  user: User | null;
+  token: string | null;
+  isAuthenticated: boolean;
+}

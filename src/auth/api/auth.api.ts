@@ -1,5 +1,9 @@
 import { apiGateway } from "@/shared/api/httpClient";
-import type { RegisterRequest, User } from "../types/auth.types";
+import type {
+  RegisterRequest,
+  User,
+  LoginRequest,
+} from "@/auth/types/auth.types";
 
 export const registerApi = async (
   payload: RegisterRequest,
@@ -19,6 +23,28 @@ export const registerApi = async (
   });
 
   const user = response.data;
+
+  const token = `token_${user.id}_${Date.now()}`;
+
+  return { user, token };
+};
+
+export const loginApi = async (
+  payload: LoginRequest,
+): Promise<{ user: User; token: string }> => {
+  const response = await apiGateway.get<User[]>(
+    `/users?email=${payload.email}`,
+  );
+
+  const user = response.data[0];
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  if (user.password !== payload.password) {
+    throw new Error("Invalid password");
+  }
 
   const token = `token_${user.id}_${Date.now()}`;
 

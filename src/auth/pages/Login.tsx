@@ -1,22 +1,45 @@
 import { Button, Card, Form, Input, Typography, message } from "antd";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Controller, useForm } from "react-hook-form";
+import { useNavigate, Link } from "react-router-dom";
+
+import { loginApi } from "@/auth/api/auth.api";
+import { authStorage } from "@/auth/storage";
+
+import { P } from "@/router/path";
 
 const { Title } = Typography;
 
-export default function Login() {
-  const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
+type LoginFormValues = {
+  email: string;
+  password: string;
+};
 
-  const onFinish = async () => {
+export const Login = () => {
+  const navigate = useNavigate();
+
+  const {
+    control,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = useForm<LoginFormValues>({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  const onSubmit = async (data: LoginFormValues) => {
     try {
-      setLoading(true);
-      message.success("Login successful");
-      navigate("/dashboard");
-    } catch (err: any) {
-      message.error(err.message || "Login failed");
-    } finally {
-      setLoading(false);
+      const { user, token } = await loginApi(data);
+
+      authStorage.setToken(token);
+      authStorage.setUser(user);
+
+      message.success("Welcome back!");
+
+      navigate(P.DASHBOARD.INDEX);
+    } catch (error) {
+      message.error(error instanceof Error ? error.message : "Login failed");
     }
   };
 
@@ -25,51 +48,45 @@ export default function Login() {
       <Card style={styles.card}>
         <Title level={3}>Login</Title>
 
-        <Form layout="vertical" onFinish={onFinish}>
-          <Form.Item
-            label="Email"
-            name="email"
-            rules={[
-              { required: true, message: "Email is required" },
-              { type: "email", message: "Invalid email" },
-            ]}
-          >
-            <Input placeholder="Enter email" />
+        <Form layout="vertical" onFinish={handleSubmit(onSubmit)}>
+          <Form.Item label="Email">
+            <Controller
+              name="email"
+              control={control}
+              render={({ field }) => <Input {...field} />}
+            />
           </Form.Item>
 
-          <Form.Item
-            label="Password"
-            name="password"
-            rules={[
-              { required: true, message: "Password is required" },
-              { min: 4, message: "Min 4 characters" },
-            ]}
-          >
-            <Input.Password placeholder="Enter password" />
+          <Form.Item label="Password">
+            <Controller
+              name="password"
+              control={control}
+              render={({ field }) => <Input.Password {...field} />}
+            />
           </Form.Item>
 
-          <Button type="primary" htmlType="submit" loading={loading} block>
+          <Button type="primary" htmlType="submit" block loading={isSubmitting}>
             Login
           </Button>
 
-          <div style={{ marginTop: 12 }}>
-            Don’t have account? <a href="/register">Register</a>
+          <div style={{ marginTop: 16, textAlign: "center" }}>
+            No account? <Link to="/register">Register</Link>
           </div>
         </Form>
       </Card>
     </div>
   );
-}
+};
 
 const styles = {
   container: {
-    height: "100vh",
+    minHeight: "100vh",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     background: "#f5f5f5",
   },
   card: {
-    width: 380,
+    width: 400,
   },
 };
