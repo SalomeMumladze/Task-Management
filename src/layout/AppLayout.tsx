@@ -7,6 +7,7 @@ import {
 import { useNavigate, Outlet } from "react-router-dom";
 import { useSidebar } from "@/ui/ui.hooks";
 import { useEffect, useState } from "react";
+import { P } from "@/router/path";
 
 const { Header, Sider, Content } = Layout;
 
@@ -30,12 +31,12 @@ export default function AppLayout() {
 
   const menuItems = [
     {
-      key: "/dashboard",
+      key: P.DASHBOARD.INDEX,
       icon: <DashboardOutlined />,
       label: "Dashboard",
     },
     {
-      key: "/projects",
+      key: P.PROJECTS.INDEX,
       icon: <AppstoreOutlined />,
       label: "Projects",
     },
@@ -68,6 +69,7 @@ export default function AppLayout() {
           <Menu
             theme="dark"
             mode="inline"
+            selectedKeys={[window.location.pathname]}
             onClick={(item) => navigate(item.key)}
             items={menuItems.map((item) => ({
               ...item,
