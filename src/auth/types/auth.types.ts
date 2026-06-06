@@ -20,7 +20,7 @@ export interface User {
   surname: string;
   email: string;
   password: string;
-  role: "owner" | "admin" | "member" | "viewer";
+  role: "owner" | "admin" | "viewer";
   createdAt: string;
 }
 

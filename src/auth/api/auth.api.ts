@@ -18,7 +18,7 @@ export const registerApi = async (
 
   const response = await apiGateway.post<User>("/users", {
     ...payload,
-    role: "member",
+    role: "owner",
     createdAt: new Date().toISOString(),
   });
 
