@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import type { RootState } from "@/@utils/store";
+import type { RootState } from "@/store/store";
 import { setSidebarOpenAction } from "./ui.state";
 
 export const useSidebar = () => {

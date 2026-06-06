@@ -9,6 +9,7 @@ import { useSidebar } from "@/ui/ui.hooks";
 import { useEffect, useState } from "react";
 import { P } from "@/router/path";
 
+
 const { Header, Sider, Content } = Layout;
 
 export default function AppLayout() {
@@ -100,7 +101,9 @@ export default function AppLayout() {
       </Drawer>
 
       <Layout>
-        <Header className="bg-white px-4">Task Management System</Header>
+        <Header className="bg-white px-4">
+          Task Management System | <button>logout</button>
+        </Header>
 
         <Content className="rounded-sm sm:p-4  p-2 bg-white sm:m-4 m-2">
           <Outlet />

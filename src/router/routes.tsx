@@ -2,18 +2,27 @@ import type { RouteObject } from "react-router-dom";
 import { useRoutes } from "react-router-dom";
 import AppLayout from "@/layout/AppLayout";
 import { P } from "@/router/path";
+import ProtectedRoute from "@/router/ProtectedRoute";
+import Login from "@/auth/pages/Login";
+import { Register } from "@/auth/pages/Register";
 
 export const routes: RouteObject[] = [
   {
     path: P.LOGIN,
-    element: <div>Login Page</div>,
+    element: <Login />,
   },
+  { path: P.REGISTER, element: <Register /> },
   {
-    path: P.HOME,
-    element: <AppLayout />,
+    element: <ProtectedRoute />,
     children: [
-      { path: P.DASHBOARD.INDEX, element: <div>Dashboard Page</div> },
-      { path: P.PROJECTS.INDEX, element: <div>Projects Page</div> },
+      {
+        path: "/",
+        element: <AppLayout />,
+        children: [
+          { path: "/dashboard", element: <div>Dashboard</div> },
+          { path: "/projects", element: <div>Projects</div> },
+        ],
+      },
     ],
   },
 ];
