@@ -22,6 +22,7 @@ export interface User {
   password: string;
   role: "owner" | "admin" | "viewer";
   createdAt: string;
+  avatar?: string | null;
 }
 
 export interface LoginRequest {

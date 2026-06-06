@@ -9,6 +9,7 @@ import PublicRoute from "@/router/PublicRoute";
 
 import { Login } from "@/auth/pages/Login";
 import { Register } from "@/auth/pages/Register";
+import { UserSettings } from "@/auth/pages/UserSettings";
 
 export const routes: RouteObject[] = [
   {
@@ -27,7 +28,7 @@ export const routes: RouteObject[] = [
         element: <AppLayout />,
         children: [
           { path: "dashboard", element: <div>Dashboard</div> },
-          { path: "projects", element: <div>Projects</div> },
+          { path: P.SETTINGS, element: <UserSettings /> },
         ],
       },
     ],

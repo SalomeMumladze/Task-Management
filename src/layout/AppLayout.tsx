@@ -2,7 +2,7 @@ import { Layout, Menu, Tooltip, Drawer, Button } from "antd";
 import {
   MenuOutlined,
   DashboardOutlined,
-  AppstoreOutlined,
+  SettingOutlined,
 } from "@ant-design/icons";
 import { useNavigate, Outlet } from "react-router-dom";
 import { useSidebar } from "@/ui/ui.hooks";
@@ -37,9 +37,9 @@ export default function AppLayout() {
       label: "Dashboard",
     },
     {
-      key: P.PROJECTS.INDEX,
-      icon: <AppstoreOutlined />,
-      label: "Projects",
+      key: P.SETTINGS,
+      icon: <SettingOutlined />,
+      label: "Settings",
     },
   ];
 

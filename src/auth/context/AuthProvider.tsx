@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { authStorage } from "../storage";
-import type { AuthState, User } from "../types/auth.types";
+import { authStorage } from "@/auth/storage";
+import type { AuthState, User } from "@/auth/types/auth.types";
 
 type AuthContextType = {
   state: AuthState;
