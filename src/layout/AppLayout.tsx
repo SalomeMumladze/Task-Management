@@ -1,7 +1,12 @@
-import { Layout, Menu, Tooltip } from "antd";
+import { Layout, Menu, Tooltip, Drawer, Button } from "antd";
+import {
+  MenuOutlined,
+  DashboardOutlined,
+  AppstoreOutlined,
+} from "@ant-design/icons";
 import { useNavigate, Outlet } from "react-router-dom";
 import { useSidebar } from "@/ui/ui.hooks";
-import { DashboardOutlined, AppstoreOutlined } from "@ant-design/icons";
+import { useEffect, useState } from "react";
 
 const { Header, Sider, Content } = Layout;
 
@@ -9,56 +14,93 @@ export default function AppLayout() {
   const navigate = useNavigate();
   const { sidebarOpen, toggleSidebar } = useSidebar();
 
+  const [isMobile, setIsMobile] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  useEffect(() => {
+    const checkSize = () => {
+      setIsMobile(window.innerWidth < 600);
+    };
+
+    checkSize();
+    window.addEventListener("resize", checkSize);
+
+    return () => window.removeEventListener("resize", checkSize);
+  }, []);
+
+  const menuItems = [
+    {
+      key: "/dashboard",
+      icon: <DashboardOutlined />,
+      label: "Dashboard",
+    },
+    {
+      key: "/projects",
+      icon: <AppstoreOutlined />,
+      label: "Projects",
+    },
+  ];
+
   return (
     <Layout style={{ minHeight: "100vh" }}>
-      <Sider
-        collapsible
-        collapsed={!sidebarOpen}
-        onCollapse={toggleSidebar}
-        width={220}
-      >
-        <div
-          style={{
-            color: "white",
-            padding: 16,
-            fontSize: 18,
-            textAlign: "center",
-          }}
-        >
-          {sidebarOpen ? "TaskFlow" : "TF"}
-        </div>
+      {isMobile && (
+        <Header className="flex justify-between items-center gap-4 p-4">
+          <Button
+            type="text"
+            icon={<MenuOutlined style={{ color: "white" }} />}
+            onClick={() => setMobileOpen(true)}
+          />
+          <span className="text-white text-lg">TaskFlow</span>
+        </Header>
+      )}
 
+      {!isMobile && (
+        <Sider
+          collapsible
+          collapsed={!sidebarOpen}
+          onCollapse={toggleSidebar}
+          width={220}
+        >
+          <div className="text-white font-bold text-lg p-4 text-center">
+            {sidebarOpen ? "TaskFlow" : "TF"}
+          </div>
+
+          <Menu
+            theme="dark"
+            mode="inline"
+            onClick={(item) => navigate(item.key)}
+            items={menuItems.map((item) => ({
+              ...item,
+              icon: (
+                <Tooltip title={item.label} placement="right">
+                  {item.icon}
+                </Tooltip>
+              ),
+              label: sidebarOpen ? item.label : "",
+            }))}
+          />
+        </Sider>
+      )}
+
+      <Drawer
+        placement="left"
+        open={mobileOpen}
+        onClose={() => setMobileOpen(false)}
+      >
         <Menu
-          theme="dark"
           mode="inline"
-          onClick={(item) => navigate(item.key)}
-          items={[
-            {
-              key: "/dashboard",
-              icon: (
-                <Tooltip title="Dashboard" placement="right">
-                  <DashboardOutlined />
-                </Tooltip>
-              ),
-              label: sidebarOpen ? "Dashboard" : "",
-            },
-            {
-              key: "/projects",
-              icon: (
-                <Tooltip title="Projects" placement="right">
-                  <AppstoreOutlined />
-                </Tooltip>
-              ),
-              label: sidebarOpen ? "Projects" : "",
-            },
-          ]}
+          onClick={(item) => {
+            navigate(item.key);
+            setMobileOpen(false);
+          }}
+          items={menuItems}
         />
-      </Sider>
+      </Drawer>
 
       <Layout>
-        <Header style={{ background: "#fff" }}>Task Management System</Header>
+        <Header className="bg-white px-4">Task Management System</Header>
 
-        <Content style={{ margin: 16, padding: 16, background: "#fff" }}>
+        <Content className="rounded-sm sm:p-4  p-2 bg-white sm:m-4 m-2">
           <Outlet />
         </Content>
       </Layout>
