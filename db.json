@@ -1,0 +1,23 @@
+{
+  "users": [
+    {
+      "name": "salome",
+      "surname": "mumladze",
+      "email": "salomemumladze775@gmail.com",
+      "password": "jshdjshd12D#@",
+      "role": "member",
+      "createdAt": "2026-06-06T17:42:46.400Z",
+      "id": "1nJPj_w09gQ"
+    },
+    {
+      "name": "salome",
+      "surname": "mumladze",
+      "email": "salomes@gmail.com",
+      "password": "jshb3#sdjhD@",
+      "role": "member",
+      "createdAt": "2026-06-06T17:50:45.060Z",
+      "id": "Ha6skx1bqWk"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
