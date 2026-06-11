@@ -9,6 +9,7 @@ import { useSidebar } from "@/ui/ui.hooks";
 import { useEffect, useState } from "react";
 import { P } from "@/router/path";
 import { authStorage } from "@/auth/storage";
+import { usePermissions } from "@/members/hooks/usePermissions";
 
 const { Header, Sider, Content } = Layout;
 
@@ -19,12 +20,15 @@ export default function AppLayout() {
   const [isMobile, setIsMobile] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  const { canEdit } = usePermissions();
+
   useEffect(() => {
     const checkSize = () => {
       setIsMobile(window.innerWidth < 600);
     };
 
     checkSize();
+
     window.addEventListener("resize", checkSize);
 
     return () => window.removeEventListener("resize", checkSize);
@@ -40,6 +44,7 @@ export default function AppLayout() {
       key: P.SETTINGS,
       icon: <SettingOutlined />,
       label: "Settings",
+      disabled: !canEdit,
     },
   ];
 
@@ -92,11 +97,11 @@ export default function AppLayout() {
       >
         <Menu
           mode="inline"
+          items={menuItems}
           onClick={(item) => {
             navigate(item.key);
             setMobileOpen(false);
           }}
-          items={menuItems}
         />
       </Drawer>
 
@@ -106,14 +111,14 @@ export default function AppLayout() {
           <button
             onClick={() => {
               authStorage.clear();
-              navigate("/login");
+              navigate(P.LOGIN);
             }}
           >
-            logout
+            Logout
           </button>
         </Header>
 
-        <Content className="rounded-sm sm:p-4  p-2 bg-white sm:m-4 m-2">
+        <Content className="rounded-sm sm:p-4 p-2 bg-white sm:m-4 m-2">
           <Outlet />
         </Content>
       </Layout>
