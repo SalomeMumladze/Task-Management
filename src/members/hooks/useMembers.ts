@@ -1,9 +1,9 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
+  removeMemberApi,
   getMembersApi,
   inviteMemberApi,
-  removeMemberApi,
-} from "@/auth/api/members.api";
+} from "@/members/api/members.api";
 
 export const useMembers = (projectId: number) => {
   return useQuery({

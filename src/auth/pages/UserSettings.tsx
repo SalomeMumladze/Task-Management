@@ -5,11 +5,13 @@ import { useEffect, useState } from "react";
 import { getAuthUserApi, updateAuthUserApi } from "@/auth/api/user.api";
 import { useAuth } from "@/auth/hooks/useAuth";
 
-import { InvitePanel } from "./InviteUsers/InvitePanel";
-import { InviteUsersList } from "./InviteUsers/InviteUsersList";
+import { InvitePanel } from "@/members/components/InvitePanel";
+import { InviteUsersList } from "@/members/components/InviteUsersList";
+import { usePermissions } from "@/members/hooks/usePermissions";
 
 export const UserSettings = () => {
   const { user } = useAuth();
+  const { canEdit } = usePermissions();
 
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
@@ -119,18 +121,22 @@ export const UserSettings = () => {
             ),
           },
 
-          {
-            key: "team",
-            label: "Team",
-            children: (
-              <>
-                <InvitePanel projectId={1} />
-                <div style={{ marginTop: 20 }}>
-                  <InviteUsersList projectId={1} />
-                </div>
-              </>
-            ),
-          },
+          ...(canEdit
+            ? [
+                {
+                  key: "team",
+                  label: "Team",
+                  children: (
+                    <>
+                      <InvitePanel projectId={1} />
+                      <div style={{ marginTop: 20 }}>
+                        <InviteUsersList projectId={1} />
+                      </div>
+                    </>
+                  ),
+                },
+              ]
+            : []),
         ]}
       />
     </Card>

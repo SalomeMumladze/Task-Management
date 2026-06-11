@@ -1,5 +1,5 @@
 import { Button, Form, Input, Select, message } from "antd";
-import { useInviteMember } from "@/auth/hooks/useMembers";
+import { useInviteMember } from "@/members/hooks/useMembers";
 
 export const InvitePanel = ({ projectId }: { projectId: number }) => {
   const { mutate: invite, isPending } = useInviteMember(projectId);

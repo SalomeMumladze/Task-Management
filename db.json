@@ -38,27 +38,36 @@
     }
   ],
 
-  "projectMembers": [
+  "members": [
     {
       "id": "m1",
       "projectId": 1,
       "userId": "u1",
       "role": "owner",
-      "status": "active"
+      "status": "active",
+      "email": "owner@test.com",
+      "name": "Nika",
+      "surname": "Owner"
     },
     {
       "id": "m2",
       "projectId": 1,
       "userId": "u2",
       "role": "viewer",
-      "status": "active"
+      "status": "active",
+      "name": "Salome",
+      "surname": "Member",
+      "email": "member@test.com"
     },
     {
       "id": "m3",
       "projectId": 1,
       "userId": "u3",
       "role": "admin",
-      "status": "active"
+      "status": "active",
+      "name": "Luka",
+      "surname": "Admin",
+      "email": "admin@test.com"
     }
   ],
 

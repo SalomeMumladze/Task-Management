@@ -1,5 +1,5 @@
 import { Table, Button, Tag } from "antd";
-import { useMembers, useRemoveMember } from "@/auth/hooks/useMembers";
+import { useMembers, useRemoveMember } from "@/members/hooks/useMembers";
 
 export const InviteUsersList = ({ projectId }: { projectId: number }) => {
   const { data = [], isLoading } = useMembers(projectId);
@@ -11,6 +11,8 @@ export const InviteUsersList = ({ projectId }: { projectId: number }) => {
       loading={isLoading}
       dataSource={data}
       columns={[
+        { title: "Name", dataIndex: "name" },
+        { title: "surname", dataIndex: "surname" },
         {
           title: "Email",
           dataIndex: "email",
