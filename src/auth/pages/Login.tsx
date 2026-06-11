@@ -3,7 +3,7 @@ import { Controller, useForm } from "react-hook-form";
 import { useNavigate, Link } from "react-router-dom";
 
 import { loginApi } from "@/auth/api/auth.api";
-import { authStorage } from "@/auth/storage";
+import { useAuth } from "@/auth/hooks/useAuth";
 
 import { P } from "@/router/path";
 
@@ -16,24 +16,19 @@ type LoginFormValues = {
 
 export const Login = () => {
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const {
     control,
     handleSubmit,
     formState: { isSubmitting },
-  } = useForm<LoginFormValues>({
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  });
+  } = useForm<LoginFormValues>();
 
   const onSubmit = async (data: LoginFormValues) => {
     try {
       const { user, token } = await loginApi(data);
 
-      authStorage.setToken(token);
-      authStorage.setUser(user);
+      login(user, token);
 
       message.success("Welcome back!");
 
