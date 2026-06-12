@@ -1,5 +1,5 @@
 import { Table, Button, Tag } from "antd";
-import { useMembers, useRemoveMember } from "@/members/hooks/useMembers";
+import { useMembers, useRemoveMember } from "@/workspaces/hooks/useMembers";
 
 export const InviteUsersList = ({ projectId }: { projectId: number }) => {
   const { data = [], isLoading } = useMembers(projectId);

@@ -1,10 +1,10 @@
 import { useAuth } from "@/auth/hooks/useAuth";
-import { useWorkspace } from "@/workpsace/WorkspaceProvider";
+import { useWorkspace } from "@/workspaces/context/WorkspaceProvider";
 import { useEffect, useState } from "react";
-import { getMembersApi } from "@/members/api/members.api";
-import { rolePermissions } from "@/members/utils/rolePermissions";
-import type { ProjectMember } from "@/members/types/members.types";
-import type { Role } from "@/members/types/members.types";
+import { getWorkspacesApi } from "@/workspaces/api/workspaces.api";
+import { rolePermissions } from "@/workspaces/utils/rolePermissions";
+import type { ProjectMember } from "@/workspaces/types/members.types";
+import type { Role } from "@/workspaces/types/members.types";
 
 export const usePermissions = () => {
   const { user } = useAuth();
@@ -21,7 +21,7 @@ export const usePermissions = () => {
     const load = async () => {
       setLoading(true);
 
-      const data = await getMembersApi(projectId);
+      const data = await getWorkspacesApi(projectId);
 
       if (!ignore) {
         setMembers(data);

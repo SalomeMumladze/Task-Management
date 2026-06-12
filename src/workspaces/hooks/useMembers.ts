@@ -1,14 +1,14 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   removeMemberApi,
-  getMembersApi,
+  getWorkspacesApi,
   inviteMemberApi,
-} from "@/members/api/members.api";
+} from "@/workspaces/api/workspaces.api";
 
 export const useMembers = (projectId: number) => {
   return useQuery({
     queryKey: ["members", projectId],
-    queryFn: () => getMembersApi(projectId),
+    queryFn: () => getWorkspacesApi(projectId),
   });
 };
 

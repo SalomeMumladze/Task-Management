@@ -1,12 +1,5 @@
 export type Role = "owner" | "admin" | "member" | "viewer";
 
-export interface ProjectMember {
-  id: string;
-  projectId: number;
-  userId: string;
-  role: Role;
-}
-
 export interface Permissions {
   canView: boolean;
   canCreate: boolean;

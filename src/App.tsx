@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import { store } from "@/store/store";
 import { AuthProvider } from "@/auth/context/AuthProvider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { WorkspaceProvider } from "./workpsace/WorkspaceProvider";
+import { WorkspaceProvider } from "./workspaces/context/WorkspaceProvider";
 
 const queryClient = new QueryClient();
 

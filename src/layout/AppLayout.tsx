@@ -4,9 +4,9 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import { useSidebar } from "@/ui/ui.hooks";
-import { usePermissions } from "@/members/hooks/usePermissions";
+import { usePermissions } from "@/workspaces/hooks/usePermissions";
 
-import { authStorage } from "@/auth/storage";
+import { authStorage } from "@/store/authStorage";
 import { P } from "@/router/path";
 
 import { Sidebar } from "./components/Sidebar";
@@ -15,7 +15,7 @@ import { getMenuItems } from "./components/menuItems";
 
 export default function AppLayout() {
   const navigate = useNavigate();
-  const { Header, Sider, Content } = Layout;
+  const { Header, Content } = Layout;
 
   const { sidebarOpen, toggleSidebar } = useSidebar();
   const { canEdit } = usePermissions();

@@ -1,7 +1,6 @@
 import { Navigate } from "react-router-dom";
-
 import { useAuth } from "@/auth/hooks/useAuth";
-import { usePermissions } from "@/members/hooks/usePermissions";
+import { usePermissions } from "@/workspaces/hooks/usePermissions";
 
 import { P } from "./path";
 

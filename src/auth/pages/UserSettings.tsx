@@ -5,9 +5,9 @@ import { useEffect, useState } from "react";
 import { getAuthUserApi, updateAuthUserApi } from "@/auth/api/user.api";
 import { useAuth } from "@/auth/hooks/useAuth";
 
-import { InvitePanel } from "@/members/components/InvitePanel";
-import { InviteUsersList } from "@/members/components/InviteUsersList";
-import { usePermissions } from "@/members/hooks/usePermissions";
+import { InvitePanel } from "@/workspaces/components/InvitePanel";
+import { InviteUsersList } from "@/workspaces/components/InviteUsersList";
+import { usePermissions } from "@/workspaces/hooks/usePermissions";
 
 export const UserSettings = () => {
   const { user } = useAuth();

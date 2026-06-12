@@ -1,4 +1,4 @@
-import type { Permissions, Role } from "@/members/types/members.types";
+import type { Permissions, Role } from "@/workspaces/types/members.types";
 
 export const rolePermissions: Record<Role, Permissions> = {
   owner: { canView: true, canCreate: true, canEdit: true, canDelete: true },

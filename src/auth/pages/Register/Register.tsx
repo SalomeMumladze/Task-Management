@@ -7,7 +7,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { registerApi } from "@/auth/api/auth.api";
 import { registerSchema } from "./register.schema";
 import type { RegisterSchema } from "./register.schema";
-import { authStorage } from "@/auth/storage";
+import { authStorage } from "@/store/authStorage";
 import { P } from "@/router/path";
 
 const { Title } = Typography;

@@ -1,5 +1,5 @@
 import { useAuth } from "@/auth/hooks/useAuth";
-import { usePermissions } from "@/members/hooks/usePermissions";
+import { usePermissions } from "@/workspaces/hooks/usePermissions";
 
 export const useMiddleware = () => {
   const { isAuthenticated } = useAuth();
