@@ -9,6 +9,7 @@ import AppLayout from "@/layout/AppLayout";
 import { Middleware } from "./middleware";
 import { P } from "./path";
 import PublicRoute from "./PublicRoute";
+import { NotFoundPage } from "@/pages/NotFoundPage";
 
 const routes = [
   {
@@ -44,6 +45,10 @@ const routes = [
             <UserSettings />
           </Middleware>
         ),
+      },
+      {
+        path: "*",
+        element: <NotFoundPage />,
       },
     ],
   },
