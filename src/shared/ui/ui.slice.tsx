@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import storage from "@/store/storage";
+import storage from "@/shared/store/storage";
 
 const initialState = {
   sidebarOpen: storage.getBool("sidebarOpen", false),

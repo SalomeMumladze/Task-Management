@@ -1,5 +1,5 @@
 import { useAuth } from "@/auth/hooks/useAuth";
-import { useWorkspace } from "@/workspaces/context/WorkspaceProvider";
+import { useWorkspace } from "@/providers/WorkspaceProvider";
 import { useEffect, useState } from "react";
 import { getWorkspacesApi } from "@/workspaces/api/workspaces.api";
 import { rolePermissions } from "@/workspaces/utils/rolePermissions";

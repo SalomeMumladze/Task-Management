@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { authStorage } from "@/store/authStorage";
+import { authStorage } from "@/shared/store/authStorage";
 import { P } from "./path";
 
 export default function PublicRoute() {

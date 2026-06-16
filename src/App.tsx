@@ -1,10 +1,10 @@
 import AppRouter from "@/router/routes";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import { store } from "@/store/store";
-import { AuthProvider } from "@/auth/context/AuthProvider";
+import { store } from "@/shared/store/store";
+import { AuthProvider } from "@/providers/AuthProvider";
+import { WorkspaceProvider } from "@/providers/WorkspaceProvider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { WorkspaceProvider } from "./workspaces/context/WorkspaceProvider";
 
 const queryClient = new QueryClient();
 

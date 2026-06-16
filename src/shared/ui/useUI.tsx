@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import type { RootState } from "@/store/store";
-import { setSidebarOpenAction } from "./ui.state";
+import type { RootState } from "@/shared/store/store";
+import { setSidebarOpenAction } from "./ui.slice";
 
 export const useSidebar = () => {
   const dispatch = useDispatch();

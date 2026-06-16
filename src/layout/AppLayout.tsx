@@ -3,10 +3,10 @@ import { MenuOutlined } from "@ant-design/icons";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import { useSidebar } from "@/ui/ui.hooks";
+import { useSidebar } from "@/shared/ui/useUI";
 import { usePermissions } from "@/workspaces/hooks/usePermissions";
 
-import { authStorage } from "@/store/authStorage";
+import { authStorage } from "@/shared/store/authStorage";
 import { P } from "@/router/path";
 
 import { Sidebar } from "./components/Sidebar";
